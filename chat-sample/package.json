@@ -15,7 +15,10 @@
 		"AI",
 		"Chat"
 	],
-	"activationEvents": [],
+	"activationEvents": [
+		"onCommand:project-manager.openProjectManager",
+		"onView:projectManagementView"
+	],
 	"contributes": {
 		"chatParticipants": [
 			{
@@ -157,6 +160,93 @@
 			{
 				"command": "cat.namesInEditor",
 				"title": "Use Cat Names in Editor"
+			},
+			{
+				"command": "project-manager.openProjectManager",
+				"title": "Project Manager: Open Project Manager"
+			},
+			{
+				"command": "project-manager.getFileContent",
+				"title": "Project Manager: Get File Content"
+			},
+			{
+				"command": "projectManagementView.refresh",
+				"title": "Refresh",
+				"icon": "$(refresh)"
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "project-manager.openProjectManager",
+					"when": "true"
+				},
+				{
+					"command": "project-manager.getFileContent",
+					"when": "true"
+				},
+				{
+					"command": "projectManagementView.refresh",
+					"when": "true"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "project-manager.openProjectManager",
+					"group": "navigation"
+				},
+				{
+					"command": "project-manager.getFileContent",
+					"group": "navigation"
+				}
+			],
+			"view/title": [
+				{
+					"command": "projectManagementView.refresh",
+					"when": "view == projectManagementView",
+					"group": "navigation"
+				}
+			]
+		},
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "project-management",
+					"title": "Project Management",
+					"icon": "$(project)"
+				}
+			]
+		},
+		"views": {
+			"project-management": [
+				{
+					"id": "project-management-overview",
+					"name": "Overview",
+					"when": "true"
+				},
+				{
+					"id": "projectManagementView",
+					"name": "Files",
+					"when": "true"
+				}
+			],
+			"explorer": [
+				{
+					"id": "projectManagementView",
+					"name": "Project Management"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "project-management-overview",
+				"contents": "Welcome to Project Management!\n[Open Project Overview](command:project-manager.openProjectManager)",
+				"when": "true"
+			},
+			{
+				"view": "projectManagementView",
+				"contents": "No files in project management folder.\n[Refresh](command:projectManagementView.refresh)",
+				"when": "true"
 			}
 		]
 	},
